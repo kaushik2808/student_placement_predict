@@ -5,7 +5,7 @@ import pickle
 import numpy as np
 
 # Load the trained model
-model_path = 'sgd_model.pkl'
+model_path = 'sgd_model2.pkl'
 with open(model_path, 'rb') as file:
     model = pickle.load(file)
 
