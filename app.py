@@ -4,7 +4,7 @@ import joblib
 import numpy as np
 
 # Load the trained model
-model_path = 'sgd_model2.joblib'  # Updated file extension
+model_path = 'sgd_model.joblib'  # Updated file extension
 model = joblib.load(model_path)
 
 app = Flask(__name__)
