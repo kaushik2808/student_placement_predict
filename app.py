@@ -1,13 +1,11 @@
 # app.py
-
 from flask import Flask, request, jsonify, render_template
-import pickle
+import joblib
 import numpy as np
 
 # Load the trained model
-model_path = 'sgd_model2.pkl'
-with open(model_path, 'rb') as file:
-    model = pickle.load(file)
+model_path = 'sgd_model2.joblib'  # Updated file extension
+model = joblib.load(model_path)
 
 app = Flask(__name__)
 
@@ -25,7 +23,7 @@ def predict():
     prediction = model.predict(final_features)
     output = 'Placed' if prediction[0] == 1 else 'Not Placed'
 
-    return render_template('index.html', prediction_text='Prediction: {}'.format(output))
+    return render_template('index.html', prediction_text=f'Prediction: {output}')
 
 if __name__ == "__main__":
     app.run(debug=True)
