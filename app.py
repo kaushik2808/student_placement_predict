@@ -42,15 +42,16 @@ def create_model():
                 'programming_certifications', 'aptitude_score', 'english_test_score']]
         y = df['placed']
         
-        X_train, _, scaler_data = train_test_split(X, y, test_size=0.2, random_state=42)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        
         scaler = StandardScaler()
         X_train_scaled = scaler.fit_transform(X_train)
         
         model = RandomForestClassifier(n_estimators=100, random_state=42)
-        model.fit(X_train_scaled, y)
+        model.fit(X_train_scaled, y_train)
         
-        # Save model and scaler
-        model_dir = os.path.join(os.path.dirname(__file__), 'model')
+        # Save model and scaler to 'model' directory in current working directory
+        model_dir = 'model'
         os.makedirs(model_dir, exist_ok=True)
         with open(os.path.join(model_dir, 'model.pkl'), 'wb') as f:
             pickle.dump(model, f)
@@ -64,7 +65,7 @@ def create_model():
 def load_model():
     """Load model and scaler from disk, or create new ones if they don't exist"""
     try:
-        model_dir = os.path.join(os.path.dirname(__file__), 'model')
+        model_dir = 'model'
         model_path = os.path.join(model_dir, 'model.pkl')
         scaler_path = os.path.join(model_dir, 'scaler.pkl')
         
